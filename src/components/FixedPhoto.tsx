@@ -12,11 +12,11 @@ export default function FixedPhoto() {
       const y = window.scrollY;
       const vh = window.innerHeight;
 
-      // Flip B&W → color over the first 60vh of scroll
-      setRotation(Math.min(1, y / (vh * 0.6)) * 180);
+      // Flip B&W → color over first 50vh
+      setRotation(Math.min(1, y / (vh * 0.5)) * 180);
 
-      // Fade out between 120vh–180vh so it disappears before Work section
-      const fade = 1 - Math.max(0, Math.min(1, (y - vh * 1.2) / (vh * 0.6)));
+      // Stay fully visible until 80vh, then fade out by 130vh
+      const fade = 1 - Math.max(0, Math.min(1, (y - vh * 0.8) / (vh * 0.5)));
       setOpacity(fade);
     };
 
@@ -26,22 +26,24 @@ export default function FixedPhoto() {
 
   const showingColor = rotation > 90;
 
+  if (opacity === 0) return null;
+
   return (
     <div
       aria-hidden="true"
       className="hidden md:block"
       style={{
         position: "fixed",
-        right: "5%",
+        right: "4%",
         top: "50%",
         transform: "translateY(-50%)",
-        width: "clamp(220px, 22vw, 300px)",
-        zIndex: 2,
+        width: "clamp(200px, 20vw, 280px)",
+        zIndex: 50,   // above everything — fades out before sections need full width
         opacity,
-        pointerEvents: opacity < 0.05 ? "none" : "auto",
+        transition: "opacity 0.08s linear",
+        pointerEvents: "none",
       }}
     >
-      {/* Flip card */}
       <div style={{ perspective: "1000px" }}>
         <div
           style={{
@@ -50,7 +52,7 @@ export default function FixedPhoto() {
             position: "relative",
             aspectRatio: "3/4",
             borderRadius: "10px",
-            boxShadow: "0 0 80px rgba(124,255,107,0.1), 0 32px 80px rgba(0,0,0,0.6)",
+            boxShadow: "0 0 80px rgba(124,255,107,0.12), 0 32px 80px rgba(0,0,0,0.7)",
           }}
         >
           {/* Front — grayscale */}
@@ -67,7 +69,7 @@ export default function FixedPhoto() {
               alt="Pratham Jadhav"
               fill
               className="object-cover object-top"
-              sizes="300px"
+              sizes="280px"
               priority
               style={{ filter: "grayscale(1) contrast(1.08)" }}
             />
@@ -78,12 +80,8 @@ export default function FixedPhoto() {
                   "linear-gradient(to top, rgba(17,17,19,0.95) 0%, rgba(17,17,19,0.3) 60%, transparent 100%)",
               }}
             >
-              <p className="text-sm font-semibold" style={{ color: "#F5F5F4" }}>
-                Pratham Jadhav
-              </p>
-              <p className="mono text-[10px] mt-0.5" style={{ color: "#9A9CA3" }}>
-                Scroll to reveal
-              </p>
+              <p className="text-sm font-semibold" style={{ color: "#F5F5F4" }}>Pratham Jadhav</p>
+              <p className="mono text-[10px] mt-0.5" style={{ color: "#9A9CA3" }}>Scroll to reveal</p>
             </div>
           </div>
 
@@ -94,7 +92,7 @@ export default function FixedPhoto() {
               backfaceVisibility: "hidden",
               WebkitBackfaceVisibility: "hidden",
               transform: "rotateY(180deg)",
-              border: "1px solid rgba(124,255,107,0.2)",
+              border: "1px solid rgba(124,255,107,0.22)",
             }}
           >
             <Image
@@ -102,7 +100,7 @@ export default function FixedPhoto() {
               alt="Pratham Jadhav"
               fill
               className="object-cover object-top"
-              sizes="300px"
+              sizes="280px"
               priority
             />
             <div
@@ -112,26 +110,21 @@ export default function FixedPhoto() {
                   "linear-gradient(to top, rgba(17,17,19,0.95) 0%, rgba(17,17,19,0.3) 60%, transparent 100%)",
               }}
             >
-              <p className="text-sm font-semibold" style={{ color: "#F5F5F4" }}>
-                Pratham Jadhav
-              </p>
+              <p className="text-sm font-semibold" style={{ color: "#F5F5F4" }}>Pratham Jadhav</p>
               <div className="flex items-center gap-1.5 mt-1">
                 <span
                   className="w-1.5 h-1.5 rounded-full bg-[#7CFF6B]"
                   style={{ animation: "pulse-dot 2s ease-in-out infinite" }}
                 />
-                <p className="mono text-[10px]" style={{ color: "#7CFF6B" }}>
-                  Available for work
-                </p>
+                <p className="mono text-[10px]" style={{ color: "#7CFF6B" }}>Available for work</p>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Scroll hint */}
       <p
-        className="mono text-[10px] text-center mt-2 transition-opacity duration-300"
+        className="mono text-[10px] text-center mt-2 transition-opacity duration-200"
         style={{ color: "#9A9CA3", opacity: showingColor ? 0 : 0.5 }}
       >
         ↓ scroll

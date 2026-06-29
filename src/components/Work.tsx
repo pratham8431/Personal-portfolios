@@ -39,55 +39,21 @@ const projects = [
     videoUrl: undefined,
   },
   {
-    label: "AI Developer Tooling",
-    title: "OpenRouter Intelligence",
-    subtitle: "LLM Tracking & Cost Estimation Platform",
+    label: "AI Startup · SaaS",
+    title: "Speeedy.ai",
+    subtitle: "AI-Powered Platform — Product Engineering",
     problem:
-      "Developers evaluating LLMs had no consolidated view of pricing, availability, and lifecycle changes across 400+ models on OpenRouter.",
+      "A fast-moving AI startup needed production-grade features shipped on a compressed timeline — evolving requirements, LLM integrations, and full-stack surfaces all in parallel.",
     built:
-      "Fully client-side platform (zero backend) tracking 400+ LLMs across 60+ providers. Client-side diffing via localStorage snapshots detects newly added, updated, and deprecated models. Cost estimation engine with Claude-powered recommendations.",
+      "Shipped AI-powered product features end-to-end using Claude Code and ChatGPT as daily tools. Built LLM integrations into live production applications, converted evolving requirements into responsive component systems, and contributed backend services supporting AI-powered user flows.",
     result:
-      "Ships with zero infrastructure cost. Claude API integration provides contextual model suggestions based on the user's described use case.",
-    stack: ["Next.js", "TypeScript", "Node.js", "OpenRouter API", "Claude API"],
+      "Delivered across the full stack in a 6-month engagement — from UI to backend — with AI tools cutting implementation time significantly while keeping code production-ready.",
+    stack: ["React", "Next.js", "TypeScript", "LLM APIs", "Claude Code", "ChatGPT"],
     link: "#",
     color: "#7CFF6B",
-    imgUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=600&fit=crop",
-    alt: "OpenRouter model intelligence platform",
-    videoUrl: undefined,
-  },
-  {
-    label: "AI Platform · Backend",
-    title: "Forge",
-    subtitle: "AI-Powered Engineering Productivity Platform",
-    problem:
-      "Engineering teams waste hours searching docs, writing incident reports, reviewing PRs, and generating SQL — all tasks a well-orchestrated AI system could handle.",
-    built:
-      "AI-powered developer productivity platform automating documentation search, code review, incident investigation, and SQL generation. REST APIs and backend services for auth, document processing, vector search, analytics, and workflow automation.",
-    result:
-      "Full-stack AI platform with pgvector-powered semantic search, end-to-end LLM integration, and modular workflow automation handling the repetitive parts of engineering ops.",
-    stack: ["Python", "FastAPI", "PostgreSQL", "pgvector", "LLM APIs"],
-    link: "#",
-    color: "#FFB020",
-    imgUrl: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=600&fit=crop",
-    alt: "Forge AI engineering platform",
-    videoUrl: undefined,
-  },
-  {
-    label: "Open Source · Agents",
-    title: "Career-Ops",
-    subtitle: "AI Workflow Automation Platform",
-    problem:
-      "Career-Ops was designed around Claude-only execution, limiting adoption for developers using other agent systems like Codex.",
-    built:
-      "Added Codex agent compatibility to Career-Ops, enabling the platform to run on agent execution systems beyond its original Claude-only design. Modular agent execution layer with reusable .agents/ abstractions and pluggable execution modes.",
-    result:
-      "Open source contribution that makes the platform provider-agnostic. The abstraction layer became a reference pattern for pluggable agent execution in the codebase.",
-    stack: ["Python", "Agent Orchestration", "Claude API", "Codex"],
-    link: "#",
-    color: "#7CFF6B",
-    imgUrl: "https://images.unsplash.com/photo-1518432031352-d6fc5734f53e?w=400&h=600&fit=crop",
-    alt: "Career-Ops AI automation",
-    videoUrl: undefined,
+    imgUrl: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=400&h=600&fit=crop",
+    alt: "Speeedy.ai product platform",
+    videoUrl: undefined, // drop your screen-recording in public/videos/ and set the path here
   },
 ];
 

@@ -28,7 +28,7 @@ export default function RootLayout({
       <body className="min-h-screen antialiased relative">
         {/* Global aurora — fixed behind everything */}
         <div className="aurora-bg" aria-hidden="true" />
-        <div className="relative z-10">{children}</div>
+<div className="relative z-10">{children}</div>
       </body>
     </html>
   );

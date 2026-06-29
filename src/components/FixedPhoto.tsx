@@ -1,33 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Image from "next/image";
 
 export default function FixedPhoto() {
-  const [rotation, setRotation] = useState(0);
-  const [opacity, setOpacity] = useState(1);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const y = window.scrollY;
-      const vh = window.innerHeight;
-
-      // Flip B&W → color over first 50vh
-      setRotation(Math.min(1, y / (vh * 0.5)) * 180);
-
-      // Stay fully visible until 80vh, then fade out by 130vh
-      const fade = 1 - Math.max(0, Math.min(1, (y - vh * 0.8) / (vh * 0.5)));
-      setOpacity(fade);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const showingColor = rotation > 90;
-
-  if (opacity === 0) return null;
-
   return (
     <div
       aria-hidden="true"
@@ -38,17 +13,17 @@ export default function FixedPhoto() {
         top: "50%",
         transform: "translateY(-50%)",
         width: "clamp(200px, 20vw, 280px)",
-        zIndex: 50,   // above everything — fades out before sections need full width
-        opacity,
-        transition: "opacity 0.08s linear",
+        zIndex: 50,
         pointerEvents: "none",
       }}
     >
+      {/* Float wrapper — separate from centering transform above */}
+      <div style={{ animation: "photo-float 4s ease-in-out infinite" }}>
       <div style={{ perspective: "1000px" }}>
         <div
           style={{
             transformStyle: "preserve-3d",
-            transform: `rotateY(${rotation}deg)`,
+            animation: "card-flip 7s ease-in-out infinite",
             position: "relative",
             aspectRatio: "3/4",
             borderRadius: "10px",
@@ -81,7 +56,7 @@ export default function FixedPhoto() {
               }}
             >
               <p className="text-sm font-semibold" style={{ color: "#F5F5F4" }}>Pratham Jadhav</p>
-              <p className="mono text-[10px] mt-0.5" style={{ color: "#9A9CA3" }}>Scroll to reveal</p>
+              <p className="mono text-[10px] mt-0.5" style={{ color: "#9A9CA3" }}>AI Design Engineer</p>
             </div>
           </div>
 
@@ -122,13 +97,7 @@ export default function FixedPhoto() {
           </div>
         </div>
       </div>
-
-      <p
-        className="mono text-[10px] text-center mt-2 transition-opacity duration-200"
-        style={{ color: "#9A9CA3", opacity: showingColor ? 0 : 0.5 }}
-      >
-        ↓ scroll
-      </p>
+      </div>
     </div>
   );
 }

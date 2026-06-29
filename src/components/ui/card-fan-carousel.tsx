@@ -33,11 +33,23 @@ function getFanTransform(fanPos: number, total: number) {
   };
 }
 
+const GLIMPSE_DURATION = 4; // seconds to loop
+
 function VideoCard({ src, poster }: { src: string; poster: string }) {
   const ref = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    ref.current?.play().catch(() => {});
+    const video = ref.current;
+    if (!video) return;
+
+    const loop = () => {
+      if (video.currentTime >= GLIMPSE_DURATION) video.currentTime = 0;
+    };
+
+    video.currentTime = 0;
+    video.play().catch(() => {});
+    video.addEventListener("timeupdate", loop);
+    return () => video.removeEventListener("timeupdate", loop);
   }, [src]);
 
   return (
@@ -47,9 +59,16 @@ function VideoCard({ src, poster }: { src: string; poster: string }) {
       poster={poster}
       autoPlay
       muted
-      loop
       playsInline
-      className="absolute inset-0 w-full h-full object-cover"
+      style={{
+        position: "absolute",
+        inset: 0,
+        width: "100%",
+        height: "100%",
+        objectFit: "cover",
+        objectPosition: "top center",
+        display: "block",
+      }}
     />
   );
 }
@@ -79,8 +98,6 @@ export default function SocialCards({ cards, activeIndex: controlledIndex }: Soc
             card.fanPos,
             VISIBLE
           );
-          const isFront = card.fanPos === 0;
-
           return (
             <div
               key={card.key}
@@ -93,8 +110,8 @@ export default function SocialCards({ cards, activeIndex: controlledIndex }: Soc
                 opacity: 1 - card.fanPos * 0.13,
               }}
             >
-              {/* Video on front card if available, else image */}
-              {isFront && card.videoUrl ? (
+              {/* Video on all cards if available, else image */}
+              {card.videoUrl ? (
                 <VideoCard src={card.videoUrl} poster={card.imgUrl} />
               ) : (
                 <Image
@@ -107,8 +124,8 @@ export default function SocialCards({ cards, activeIndex: controlledIndex }: Soc
                 />
               )}
 
-              {/* Depth overlay on non-front cards */}
-              {!isFront && (
+              {/* Depth overlay on background cards */}
+              {card.fanPos > 0 && (
                 <div
                   className="absolute inset-0"
                   style={{ background: `rgba(17,17,19,${card.fanPos * 0.2})` }}

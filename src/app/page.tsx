@@ -7,14 +7,10 @@ import Work from "@/components/Work";
 import Skills from "@/components/Skills";
 import About from "@/components/About";
 import Contact from "@/components/Contact";
-import FixedPhoto from "@/components/FixedPhoto";
-
 export default function Home() {
   return (
     <main>
       <Navbar />
-      {/* Fixed photo stays in background — sections scroll over it */}
-      <FixedPhoto />
 
       {/* Hero has no background — photo shows through */}
       <Hero />

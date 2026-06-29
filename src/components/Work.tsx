@@ -19,7 +19,7 @@ const projects = [
     color: "#7CFF6B",
     imgUrl: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=400&h=600&fit=crop",
     alt: "Janani Industries 3D site",
-    videoUrl: undefined, // add your screen-recording URL here
+    videoUrl: "/videos/janani-ui.mov",
   },
   {
     label: "AI Product · SaaS",
@@ -36,7 +36,7 @@ const projects = [
     color: "#FFB020",
     imgUrl: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=400&h=600&fit=crop",
     alt: "Influract AI contract analyzer",
-    videoUrl: undefined,
+    videoUrl: "/videos/influract-ui.mov",
   },
   {
     label: "AI Startup · SaaS",
@@ -53,7 +53,7 @@ const projects = [
     color: "#7CFF6B",
     imgUrl: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=400&h=600&fit=crop",
     alt: "Speeedy.ai product platform",
-    videoUrl: undefined, // drop your screen-recording in public/videos/ and set the path here
+    videoUrl: "/videos/speeedy-ui.mov",
   },
 ];
 

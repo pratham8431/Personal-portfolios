@@ -30,7 +30,7 @@ const experience = [
 export default function About() {
   return (
     <section
-      id="about-me"
+      id="about"
       className="py-24 px-6"
       style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}
     >
